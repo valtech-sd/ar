@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <title>03 - Basic Scene</title>
     <title>Valtech - AR</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,41 +17,83 @@
     />
   </head>
   <body>
-    <div class="center">
-      <h1>Immersive Web with Valtech Future Studio</h1>
-      <div class="container">
-        <h3>8th Wall Demo</h3>
+    <canvas class="webgl"></canvas>
+
+    <div class="container">
+      <section class="section">
+        <h1 class="title">Valtech Future Studio</h1>
         <p>
           Why WebAR? WebAR, or web-based augmented reality, enables
-          augmented reality (AR) to work within a browser. Web AR opens up
+          augmented reality (AR) to work within a browser. WebAR opens up
           new ways to connect with users by engaging them in extraordinary,
           interactive experiences anywhere they are — all with no app
           required.
         </p>
-        <h5>Massive Reach</h5>
+        <h5 class="subtitle">Massive Reach</h5>
         <p>
           3.5 billion smartphones worldwide across iOS and Android devices
         </p>
-        <h5>Creative Freedom</h5>
+        <h5 class="subtitle">Creative Freedom</h5>
         <p>
           Harness the freedom and the flexibility of the web with complete
           control of your content, launch schedule, analytics solution and
-          more.
+          more
         </p>
-        <h5>No App Required</h5>
+        <h5 class="subtitle">No App Required</h5>
         <p>
           WebAR experiences require no app to download, reducing activation
           energy and barrier to entry to increase engagement with your
-          content.
+          content
         </p>
+      </section>
+      <section class="section">
+        <h3 class="title">8th Wall Demo</h3>
+        <p>
+          Showcasing the power of WebAR, Valtech has built an 8th Wall demo
+          that highlights some of its core features, including World
+          Tracking, Image Targets, and Face Effects.
+        </p>
+        <ul>
+          <li>
+            World Tracking: Create markerless experiences that allow the
+            user to place interactive 3D content in their real world
+            environment.
+          </li>
+          <li>
+            Image Targets: Allows web apps to instantly detect and track
+            any uploaded image on flat and curved surfaces.
+          </li>
+          <li>
+            Face Effects: Render face meshes or anchor 3D objects such as
+            glasses or jewelry to a variety of face attachment points.
+          </li>
+          <li>
+            6DoF Positional Tracking: Allows the user to explore their
+            space and interact with AR content using only their smartphone
+            camera and gyro.
+          </li>
+          <li>
+            Surface Estimation: Allows detection of the ground or other
+            flat surfaces such as tables for precise virtual object
+            placement.
+          </li>
+          <li>
+            Lighting Estimation: Lighting levels in the user’s real world
+            can be used to match lighting in an AR scene.
+          </li>
+          <li>
+            World Points: Points in the world can be detected and used by
+            an AR experience for visualization.
+          </li>
+        </ul>
         <div class="demo-container">
           <p class="try-it-out">Check it out here:</p>
-          <a data-8code="qrt3y"></a>
+          <a data-8code="qrt3y" data-dark-theme></a>
           <script src="//cdn.8thwall.com/web/share/embed8.js"></script>
         </div>
-      </div>
-      <div class="container">
-        <h3>Spyglass POC</h3>
+      </section>
+      <section class="section">
+        <h3 class="title">Spyglass POC</h3>
         <p>
           Spyglass is a 3-week, augmented reality (AR) proof of concept
           (POC) by Valtech and Contentstack.
@@ -69,11 +111,13 @@
         </p>
         <p>
           Visit our Spyglass demo page for more information:
-          <a href="https://spyglass.valtech.engineering/" target="_blank"
+          <a href="https://spyglass.valtech.engineering/" target="_blank" class="link"
             >https://spyglass.valtech.engineering/</a
           >
         </p>
-      </div>
+      </section>
     </div>
   </body>
+  <script src="./three/three.min.js"></script>
+  <script type="module" src="./script.js" defer></script>
 </html>
