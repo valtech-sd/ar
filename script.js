@@ -18,7 +18,7 @@ const scene = new THREE.Scene();
 // objects
 // material
 const material = new THREE.MeshBasicMaterial({
-  color: 0x00FF9F,
+  color: 0x00ff9f,
   wireframe: true,
 });
 

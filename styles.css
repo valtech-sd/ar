@@ -36,21 +36,21 @@ section:nth-child(even) {
 
 .subtitle {
   font-size: 1rem;
-  color: #00C878;
+  color: #00c878;
 }
 
 .demo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #00C878
+  color: #00c878;
 }
 
 .demo-container > p {
-  margin-right: 20px
+  margin-right: 20px;
 }
 
 .link {
-  color: #00C878;
+  color: #00c878;
   text-decoration: none;
 }
