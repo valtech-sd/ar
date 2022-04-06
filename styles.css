@@ -54,3 +54,18 @@ section:nth-child(even) {
   color: #00c878;
   text-decoration: none;
 }
+
+@media only screen and (max-width: 600px) {
+  .section {
+    grid-column: 1 / 13;
+  }
+
+  section:nth-child(even) {
+    grid-column: 1 / 13;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 2rem;
+  }
+}
