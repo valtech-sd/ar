@@ -17,7 +17,7 @@ html {
   position: relative;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(3, 100vh);
+  grid-template-rows: repeat(7, 100vh);
   align-items: center;
 }
 
@@ -30,12 +30,25 @@ section:nth-child(even) {
   grid-column: 7 / 12;
 }
 
+section:nth-child(4) {
+  grid-column: 2 / 12;
+}
+
+.video {
+  width: 100%
+}
+
 .title {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .subtitle {
   font-size: 1rem;
+}
+
+.green,
+.subtitle,
+.demo-container {
   color: #00c878;
 }
 
@@ -43,7 +56,6 @@ section:nth-child(even) {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #00c878;
 }
 
 .demo-container > p {
