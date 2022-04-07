@@ -1,19 +1,17 @@
-/**
- * Debug
- */
-
 const parameters = {
   materialColor: '#ffeded',
 };
 
-/**
- * Base
- */
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
 
 // Scene
 const scene = new THREE.Scene();
+
+// textures
+const TextureLoader = new THREE.TextureLoader();
+const vfsTexture = TextureLoader.load('assets/images/vfs.png');
+const spaceTexture = TextureLoader.load('assets/images/space.jpg');
 
 // objects
 // material
@@ -23,62 +21,78 @@ const material = new THREE.MeshBasicMaterial({
 });
 
 // meshes
-const objectsDistance = 4;
-const mesh1 = new THREE.Mesh(
+
+const torus = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.4, 16, 60),
   material
 );
 
-const mesh2 = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1, 5, 5, 5),
-  material
+const logo = new THREE.Mesh(
+  new THREE.BoxGeometry(2, 1.5, 2, 5, 5, 5),
+  new THREE.MeshBasicMaterial({
+    map: vfsTexture,
+  })
 );
-const mesh3 = new THREE.Mesh(
+
+const torusKnot = new THREE.Mesh(
   new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
   material
 );
 
-mesh1.position.y = -objectsDistance * 0;
-mesh2.position.y = -objectsDistance * 1;
-mesh3.position.y = -objectsDistance * 2;
-
-mesh1.position.x = 2;
-mesh2.position.x = -2;
-mesh3.position.x = 2;
-
-scene.add(mesh1, mesh2, mesh3);
-
-const sectionMeshes = [mesh1, mesh2, mesh3];
-
-// particles
-// geometry
-const particlesCount = 200;
-const positions = new Float32Array(particlesCount * 3);
-
-for (let i = 0; i < particlesCount; i++) {
-  positions[i * 3] = (Math.random() - 0.5) * 10;
-  positions[i * 3 + 1] =
-    objectsDistance * 0.5 -
-    Math.random() * objectsDistance * sectionMeshes.length;
-  positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-}
-
-const particlesGeometry = new THREE.BufferGeometry();
-particlesGeometry.setAttribute(
-  'position',
-  new THREE.BufferAttribute(positions, 3)
+const box = new THREE.Mesh(
+  new THREE.BoxGeometry(1.5, 1.5, 1.5, 5, 5, 5),
+  material
 );
 
-// materials
-const particlesMaterial = new THREE.PointsMaterial({
+const cylinder = new THREE.Mesh(
+  new THREE.CylinderGeometry(1, 0.5, 1.5, 32),
+  material
+);
+
+const triangle = new THREE.Mesh(
+  new THREE.RingGeometry(1, 1.5, 3),
+  material
+)
+
+const objectsDistance = 4;
+logo.position.y = -objectsDistance * 0;
+torus.position.y = -objectsDistance * 1;
+torusKnot.position.y = -objectsDistance * 2;
+box.position.y = -objectsDistance * 4;
+cylinder.position.y = -objectsDistance * 5;
+triangle.position.y = -objectsDistance * 6;
+
+logo.position.x = 2;
+torus.position.x = -2;
+torusKnot.position.x = 2;
+box.position.x = 2;
+cylinder.position.x = -2;
+triangle.position.x = 2;
+
+scene.add(torus, logo, torusKnot, box, cylinder, triangle);
+
+const sectionMeshes = [torus, torusKnot, box, cylinder, triangle];
+
+// stars
+const starGeometry = new THREE.SphereGeometry(0.2, 32, 32);
+const starMaterial = new THREE.PointsMaterial({
   color: parameters.materialColor,
+  size: 0.3,
   sizeAttenuation: true,
-  size: 0.03,
 });
 
-// points
-const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particles);
+function addStar() {
+  const star = new THREE.Mesh(starGeometry, starMaterial);
+  const [x, y, z] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(300));
+
+  star.position.set(x, y, z);
+  scene.add(star);
+}
+
+Array(600).fill().forEach(addStar);
+// scene.background = spaceTexture
 
 // lights
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -161,7 +175,7 @@ window.addEventListener('mousemove', (event) => {
 const clock = new THREE.Clock();
 let previousTime = 0;
 
-const tick = () => {
+function animate() {
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
@@ -182,11 +196,14 @@ const tick = () => {
     mesh.rotation.y += deltaTime * 0.12;
   }
 
+  // animate box logo
+  logo.rotation.y += deltaTime * 0.3;
+
   // Render
   renderer.render(scene, camera);
 
   // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
-};
+  requestAnimationFrame(animate);
+}
 
-tick();
+animate();
